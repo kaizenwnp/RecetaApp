@@ -4,3 +4,10 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     id("com.google.gms.google-services") version "4.4.2" apply false
 }
+
+buildscript {
+    dependencies {
+        // Añadido para soporte Kotlin
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
+    }
+}

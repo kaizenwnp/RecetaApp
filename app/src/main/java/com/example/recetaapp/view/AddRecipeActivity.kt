@@ -38,7 +38,7 @@ class AddRecipeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_recipe)
 
-        // Initialize views
+
         recipeNameInput = findViewById(R.id.recipe_name_input)
         recipeTypeSpinner = findViewById(R.id.recipe_type_spinner)
         addImageButton = findViewById(R.id.add_image_button)
@@ -47,7 +47,7 @@ class AddRecipeActivity : AppCompatActivity() {
         recipeStepsInput = findViewById(R.id.recipe_steps_input)
         submitRecipeButton = findViewById(R.id.submit_recipe_button)
 
-        // Load the recipe types from the intent and set to the spinner
+
         val recipeTypes = intent.getStringArrayListExtra("RECIPE_TYPES")
         if (recipeTypes != null) {
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, recipeTypes)
@@ -55,27 +55,27 @@ class AddRecipeActivity : AppCompatActivity() {
             recipeTypeSpinner.adapter = adapter
         }
 
-        // Handle image selection
+
         addImageButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             imagePickerLauncher.launch(intent)
         }
 
-        // Handle recipe submission
+
         submitRecipeButton.setOnClickListener {
             val recipeName = recipeNameInput.text.toString()
             val recipeType = recipeTypeSpinner.selectedItem?.toString() ?: ""
             val recipeIngredients = recipeIngredientsInput.text.toString().split(",").map { it.trim() }
             val recipeSteps = recipeStepsInput.text.toString().split(",").map { it.trim() }
 
-            // Validate inputs
+
             if (recipeName.isBlank() || recipeType.isBlank() || recipeIngredients.isEmpty() || recipeSteps.isEmpty()) {
                 Toast.makeText(this, "Please fill in all the fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Save the image locally and then submit the recipe
+
             selectedImageUri?.let {
                 val localImagePath = saveImageToLocal(it)
                 submitRecipe(recipeName, recipeType, recipeIngredients, recipeSteps, localImagePath)
@@ -83,7 +83,7 @@ class AddRecipeActivity : AppCompatActivity() {
         }
     }
 
-    // Function to save the selected image to internal storage
+
     private fun saveImageToLocal(imageUri: Uri): String? {
         return try {
             val inputStream: InputStream? = contentResolver.openInputStream(imageUri)
@@ -96,14 +96,14 @@ class AddRecipeActivity : AppCompatActivity() {
                 }
             }
 
-            file.name  // Return the name of the saved image
+            file.name
         } catch (e: Exception) {
             e.printStackTrace()
             null
         }
     }
 
-    // Function to submit the recipe
+
     private fun submitRecipe(name: String, type: String, ingredients: List<String>, steps: List<String>, imagePath: String?) {
         val resultIntent = Intent().apply {
             putExtra("NEW_RECIPE_NAME", name)
@@ -113,6 +113,6 @@ class AddRecipeActivity : AppCompatActivity() {
             putExtra("NEW_RECIPE_IMAGE_URL", imagePath)
         }
         setResult(Activity.RESULT_OK, resultIntent)
-        finish() // Close the activity after submission
+        finish()
     }
 }

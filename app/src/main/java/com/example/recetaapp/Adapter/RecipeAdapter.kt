@@ -18,7 +18,7 @@ class RecipeAdapter(private val recipes: List<Recipe>, private val context: Cont
 
     class RecipeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val recipeName: TextView = view.findViewById(R.id.recipe_name)
-        val recipeType: TextView = view.findViewById(R.id.recipe_type)  // Recipe type TextView
+        val recipeType: TextView = view.findViewById(R.id.recipe_type)
         val recipeImage: ImageView = view.findViewById(R.id.recipe_image)
     }
 
@@ -30,9 +30,9 @@ class RecipeAdapter(private val recipes: List<Recipe>, private val context: Cont
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val recipe = recipes[position]
         holder.recipeName.text = recipe.name
-        holder.recipeType.text = recipe.type  // Set the recipe type in the TextView
+        holder.recipeType.text = recipe.type
 
-        // Load image from internal storage
+
         loadImageFromInternalStorage(recipe.imageUrl, holder.recipeImage)
 
         holder.itemView.setOnClickListener {
@@ -49,7 +49,7 @@ class RecipeAdapter(private val recipes: List<Recipe>, private val context: Cont
     // Load image from internal storage
     private fun loadImageFromInternalStorage(imageName: String?, imageView: ImageView) {
         if (imageName.isNullOrBlank()) {
-            imageView.setImageResource(R.drawable.error) // Show error if image name is null
+            imageView.setImageResource(R.drawable.error)
             return
         }
 
@@ -61,7 +61,7 @@ class RecipeAdapter(private val recipes: List<Recipe>, private val context: Cont
                 .error(R.drawable.error)
                 .into(imageView)
         } else {
-            imageView.setImageResource(R.drawable.error) // Show error if image not found
+            imageView.setImageResource(R.drawable.error)
         }
     }
 }

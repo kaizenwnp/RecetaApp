@@ -51,12 +51,12 @@ class RegisterActivity : AppCompatActivity() {
                         saveUserName(userId, name)
                     }
 
-                    // Registration success, navigate to MainActivity
+
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {
-                    // Registration failed, show error message
+
                     Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }

@@ -35,43 +35,43 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
 
-        // Initialize views
+
         progressBar = findViewById(R.id.progressBar)
         welcomeText = findViewById(R.id.welcome_text)
 
         progressBar.max = 100
         progressBar.progress = 0
 
-        // Copy all drawable images to internal storage asynchronously
+
         CoroutineScope(Dispatchers.Main).launch {
             copyAllDrawableImagesToInternalStorage()
         }
 
-        // Retrieve and display the user's name in the welcome message
+
         retrieveAndDisplayUserName()
 
-        // Button to navigate to Recipe List after copying is done
+
         val goToRecipesButton: Button = findViewById(R.id.button_go_to_recipes)
         goToRecipesButton.setOnClickListener {
             val intent = Intent(this, RecipeListActivity::class.java)
             startActivity(intent)
         }
 
-        // Button to navigate to RandomMealActivity
+
         val randomMealButton: Button = findViewById(R.id.button_random_meal)
         randomMealButton.setOnClickListener {
             val intent = Intent(this, RandomMealActivity::class.java)
             startActivity(intent)
         }
 
-        // Logout button to navigate to LoginActivity
+
         val logoutButton: Button = findViewById(R.id.logout_button)
         logoutButton.setOnClickListener {
             logout()
         }
     }
 
-    // Function to retrieve and display the user's name
+
     private fun retrieveAndDisplayUserName() {
         val userId = auth.currentUser?.uid
 
@@ -91,15 +91,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Logout function
     private fun logout() {
         auth.signOut()
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
-        finish() // Close MainActivity after logging out
+        finish()
     }
 
-    // Copy all drawable images to internal storage using coroutines (asynchronous)
+
     private suspend fun copyAllDrawableImagesToInternalStorage() = withContext(Dispatchers.IO) {
         val drawableClass = R.drawable::class.java
         val fields: Array<Field> = drawableClass.fields
@@ -112,10 +111,10 @@ class MainActivity : AppCompatActivity() {
                 val resourceName = field.name
                 val fileName = "$resourceName.jpg"
 
-                // Copy drawable to internal storage
+
                 copyDrawableToInternalStorage(resourceId, fileName)
 
-                // Update progress on the main thread
+
                 currentProgress++
                 withContext(Dispatchers.Main) {
                     val progress = (currentProgress.toFloat() / totalImages.toFloat() * 100).toInt()
@@ -126,14 +125,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Notify user or navigate to another page after copying is done
+
         withContext(Dispatchers.Main) {
             Toast.makeText(this@MainActivity, "All images copied!", Toast.LENGTH_SHORT).show()
             progressBar.progress = 100
         }
     }
 
-    // Function to copy a single drawable resource to internal storage
+
     private fun copyDrawableToInternalStorage(drawableId: Int, fileName: String): String? {
         return try {
             val inputStream: InputStream = resources.openRawResource(drawableId)
@@ -146,7 +145,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            file.name // Return the filename saved in internal storage
+            file.name
         } catch (e: Exception) {
             e.printStackTrace()
             null

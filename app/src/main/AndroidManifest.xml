@@ -30,17 +30,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RecipeListActivity"
+        <activity android:name=".view.RecipeListActivity"
             android:theme="@style/Theme.RecipeApp"/>
-        <activity android:name=".AddRecipeActivity"
+        <activity android:name=".view.AddRecipeActivity"
             android:theme="@style/Theme.RecipeApp"/>
-        <activity android:name=".RecipeDetailActivity"
+        <activity android:name=".view.RecipeDetailActivity"
             android:theme="@style/Theme.RecipeApp"/>
-        <activity android:name=".LoginActivity"
+        <activity android:name=".view.LoginActivity"
             android:theme="@style/Theme.RecipeApp"/>
-        <activity android:name=".RegisterActivity"
+        <activity android:name=".view.RegisterActivity"
             android:theme="@style/Theme.RecipeApp"/>
-        <activity android:name=".RandomMealActivity"
+        <activity android:name=".view.RandomMealActivity"
             android:theme="@style/Theme.RecipeApp"/>
     </application>
 

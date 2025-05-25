@@ -8,7 +8,7 @@
     tools:context=".view.LoginActivity"
     android:padding="16dp">
 
-    <!-- Email input with Material TextInputLayout -->
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_input_layout"
         android:layout_width="0dp"
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="100dp"
-        android:layout_marginBottom="20dp"> <!-- Added proper space below the email field -->
+        android:layout_marginBottom="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email_input"
@@ -28,7 +28,7 @@
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Password input with Material TextInputLayout -->
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_input_layout"
         android:layout_width="0dp"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@id/email_input_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="30dp"> <!-- Added proper space below the password field -->
+        android:layout_marginBottom="30dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_input"
@@ -47,7 +47,7 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Login Button -->
+
     <Button
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
@@ -58,9 +58,9 @@
         app:layout_constraintTop_toBottomOf="@id/password_input_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" /> <!-- Space between Password and Login -->
+        android:layout_marginTop="16dp" />
 
-    <!-- Register Button -->
+
     <Button
         android:id="@+id/register_button"
         android:layout_width="wrap_content"
@@ -71,6 +71,6 @@
         app:layout_constraintTop_toBottomOf="@id/login_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" /> <!-- Space between Login and Register -->
+        android:layout_marginTop="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

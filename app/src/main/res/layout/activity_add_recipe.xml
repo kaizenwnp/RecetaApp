@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Recipe Name (Material TextInputLayout) -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Recipe Type (Spinner with Material design style) -->
+
         <TextView
             android:id="@+id/recipe_type_label"
             android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/spinner_background" />
 
-        <!-- Add Image Button -->
+
         <Button
             android:id="@+id/add_image_button"
             android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:textColor="@color/colorPrimary" />
 
-        <!-- ImageView to show selected image -->
+
         <ImageView
             android:id="@+id/selected_image"
             android:layout_width="match_parent"
@@ -68,7 +68,7 @@
             android:visibility="gone"
             android:contentDescription="Selected Recipe Image" />
 
-        <!-- Ingredients Input -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Steps Input -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                 android:textSize="16sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Submit Button -->
+
         <Button
             android:id="@+id/submit_recipe_button"
             android:layout_width="match_parent"

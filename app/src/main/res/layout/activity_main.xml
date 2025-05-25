@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- App Bar (Toolbar) inside AppBarLayout -->
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             app:titleTextColor="@android:color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Main Content (Welcome message) -->
+
     <TextView
         android:id="@+id/welcome_text"
         android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Button to navigate to the RecipeListActivity -->
+
     <Button
         android:id="@+id/button_go_to_recipes"
         android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp" />
 
-    <!-- New Meal Planner Button -->
+
     <Button
         android:id="@+id/button_random_meal"
         android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
-    <!-- Logout button -->
+
     <Button
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="24dp" />
 
-    <!-- Horizontal Progress Bar at the Bottom -->
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"

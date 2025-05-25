@@ -8,7 +8,7 @@
     tools:context=".view.RandomMealActivity"
     android:padding="16dp">
 
-    <!-- Meal Image (centered and fixed height) -->
+
     <ImageView
         android:id="@+id/meal_image"
         android:layout_width="0dp"
@@ -20,7 +20,7 @@
         android:contentDescription="Meal Image"
         android:layout_marginBottom="16dp" />
 
-    <!-- Meal Name (centered and bold) -->
+
     <TextView
         android:id="@+id/meal_name"
         android:layout_width="0dp"
@@ -35,7 +35,7 @@
         android:padding="16dp"
         android:gravity="center" />
 
-    <!-- Meal Ingredients (centered) -->
+
     <TextView
         android:id="@+id/meal_ingredients"
         android:layout_width="0dp"
@@ -47,7 +47,7 @@
         android:textSize="16sp"
         android:padding="16dp" />
 
-    <!-- Meal Instructions (scrollable if content is long) -->
+
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -65,7 +65,7 @@
             android:padding="16dp" />
     </ScrollView>
 
-    <!-- Refresh Button (follows custom button style) -->
+
     <Button
         android:id="@+id/refresh_button"
         android:layout_width="wrap_content"

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".view.RecipeListActivity">
 
-    <!-- AppBarLayout with Toolbar -->
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
         android:layout_width="0dp"
@@ -26,7 +26,7 @@
             app:titleTextColor="@android:color/white"/>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Recipe Type Spinner (Drop-down) -->
+
     <Spinner
         android:id="@+id/recipe_type_spinner"
         android:layout_width="0dp"
@@ -38,7 +38,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Divider to visually separate the drop-down from the RecyclerView -->
+
     <View
         android:id="@+id/divider"
         android:layout_width="0dp"
@@ -50,7 +50,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp" />
 
-    <!-- RecyclerView for displaying recipes -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipe_recycler_view"
         android:layout_width="0dp"
@@ -64,7 +64,7 @@
         android:layout_marginHorizontal="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <!-- Add Recipe Button -->
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/add_recipe_button"
         android:layout_width="wrap_content"

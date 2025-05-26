@@ -2,12 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.recetaapp">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-
 
     <application
         android:allowBackup="true"
@@ -30,18 +29,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.RecipeListActivity"
-            android:theme="@style/Theme.RecipeApp"/>
-        <activity android:name=".view.AddRecipeActivity"
-            android:theme="@style/Theme.RecipeApp"/>
-        <activity android:name=".view.RecipeDetailActivity"
-            android:theme="@style/Theme.RecipeApp"/>
-        <activity android:name=".view.LoginActivity"
-            android:theme="@style/Theme.RecipeApp"/>
-        <activity android:name=".view.RegisterActivity"
-            android:theme="@style/Theme.RecipeApp"/>
-        <activity android:name=".view.RandomMealActivity"
-            android:theme="@style/Theme.RecipeApp"/>
+        <activity
+            android:name=".view.RecipeListActivity"
+            android:theme="@style/Theme.RecipeApp" />
+        <activity
+            android:name=".view.AddRecipeActivity"
+            android:theme="@style/Theme.RecipeApp" />
+        <activity
+            android:name=".view.RecipeDetailActivity"
+            android:theme="@style/Theme.RecipeApp" />
+        <activity
+            android:name=".view.LoginActivity"
+            android:theme="@style/Theme.RecipeApp" />
+        <activity
+            android:name=".view.RegisterActivity"
+            android:theme="@style/Theme.RecipeApp" />
+        <activity
+            android:name=".view.RandomMealActivity"
+            android:theme="@style/Theme.RecipeApp" />
     </application>
 
 </manifest>

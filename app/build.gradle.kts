@@ -2,11 +2,12 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
+    id("org.jetbrains.kotlin.plugin.compose") version "2.0.0"
 }
 
 android {
     namespace = "com.example.recetaapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.recetaapp"
@@ -31,18 +32,16 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -64,6 +63,9 @@ dependencies {
     implementation(libs.material)
     implementation(libs.firebase.storage.ktx)
     implementation(libs.firebase.database.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -77,14 +79,15 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.13.2")
     implementation("com.google.android.material:material:1.9.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
-
+    implementation(platform("com.google.firebase:firebase-bom:33.14.0"))
+    implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.firebase:firebase-auth:21.0.3")
     implementation("com.google.firebase:firebase-analytics")
     implementation ("androidx.security:security-crypto:1.1.0-alpha03")
     implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
-    // Retrofit for REST API calls
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("androidx.compose.compiler:compiler:1.5.11")
 
 
 }

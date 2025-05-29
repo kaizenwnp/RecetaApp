@@ -28,12 +28,14 @@ class RecipeListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var recipeTypeSpinner: Spinner
     private lateinit var addRecipeButton: Button
+    private lateinit var searchView: androidx.appcompat.widget.SearchView
 
     private val viewModel: RecipeViewModel by viewModels()
 
     private var allRecipes: MutableList<Recipe> = mutableListOf()
     private var recipeTypeNames: MutableList<String> = mutableListOf("Show All")
 
+    private var currentSearchQuery: String = ""
 
     private val recipeDetailLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK && result.data != null) {
@@ -42,14 +44,12 @@ class RecipeListActivity : AppCompatActivity() {
                 updateRecipeInList(updatedRecipe)
             }
 
-
             val deletedRecipeId = result.data?.getIntExtra("DELETE_RECIPE_ID", -1) ?: -1
             if (deletedRecipeId != -1) {
                 deleteRecipeFromList(deletedRecipeId)
             }
         }
     }
-
 
     private val addRecipeLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
@@ -77,6 +77,20 @@ class RecipeListActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recipe_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        searchView = findViewById(R.id.search_view)
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // No acción especial al enviar búsqueda
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                currentSearchQuery = newText?.trim() ?: ""
+                updateRecipeListBasedOnSelection()
+                return true
+            }
+        })
+
         recipeTypeSpinner = findViewById(R.id.recipe_type_spinner)
         addRecipeButton = findViewById(R.id.add_recipe_button)
 
@@ -100,35 +114,35 @@ class RecipeListActivity : AppCompatActivity() {
     private fun setupRecipeTypeSpinner() {
         val recipeTypes: List<RecipeTypes> = loadRecipeTypesFromAssets()
 
-
         recipeTypeNames.addAll(recipeTypes.map { recipeType: RecipeTypes -> recipeType.type })
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, recipeTypeNames)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         recipeTypeSpinner.adapter = adapter
 
-
         recipeTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 updateRecipeListBasedOnSelection()
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-
-            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
     }
 
-
     private fun updateRecipeListBasedOnSelection() {
         val selectedType = recipeTypeSpinner.selectedItem?.toString() ?: "Show All"
-        val filteredRecipes = if (selectedType == "Show All") {
+        val filteredByType = if (selectedType == "Show All") {
             allRecipes
         } else {
             allRecipes.filter { it.type == selectedType }
         }
 
-        // Set the adapter for RecyclerView
+        val filteredRecipes = if (currentSearchQuery.isEmpty()) {
+            filteredByType
+        } else {
+            filteredByType.filter { it.name.contains(currentSearchQuery, ignoreCase = true) }
+        }
+
         recyclerView.adapter = RecipeAdapter(filteredRecipes, this).apply {
             setOnItemClickListener { recipe ->
                 val intent = Intent(this@RecipeListActivity, RecipeDetailActivity::class.java)
@@ -138,14 +152,10 @@ class RecipeListActivity : AppCompatActivity() {
         }
     }
 
-
-
     private fun loadRecipes() {
         val recipesFile = File(filesDir, "recipes.json")
         if (recipesFile.exists()) {
             val json = recipesFile.bufferedReader().use { it.readText() }
-
-
             val recipeListType = object : TypeToken<List<Recipe>>() {}.type
             allRecipes = Gson().fromJson(json, recipeListType)
         } else {
@@ -155,13 +165,11 @@ class RecipeListActivity : AppCompatActivity() {
         updateRecipeListBasedOnSelection()
     }
 
-
     private fun saveRecipesToInternalStorage(recipes: List<Recipe>) {
         val file = File(filesDir, "recipes.json")
         val json = Gson().toJson(recipes)
         file.writeText(json)
     }
-
 
     private fun updateRecipeInList(updatedRecipe: Recipe) {
         val index = allRecipes.indexOfFirst { it.id == updatedRecipe.id }
@@ -172,8 +180,6 @@ class RecipeListActivity : AppCompatActivity() {
         }
     }
 
-
-
     private fun deleteRecipeFromList(recipeId: Int) {
         val index = allRecipes.indexOfFirst { it.id == recipeId }
         if (index != -1) {
@@ -183,12 +189,10 @@ class RecipeListActivity : AppCompatActivity() {
         }
     }
 
-
     private fun loadRecipesFromAssets(): List<Recipe> {
         val json = assets.open("recipes.json").bufferedReader().use { it.readText() }
         return Gson().fromJson(json, object : TypeToken<List<Recipe>>() {}.type)
     }
-
 
     private fun loadRecipeTypesFromAssets(): List<RecipeTypes> {
         val json = assets.open("recipetypes.json").bufferedReader().use { it.readText() }

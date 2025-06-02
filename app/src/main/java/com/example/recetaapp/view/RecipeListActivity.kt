@@ -3,6 +3,8 @@ package com.example.recetaapp.view
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -101,6 +103,8 @@ class RecipeListActivity : AppCompatActivity() {
             addRecipeLauncher.launch(intent)
         }
 
+        setSupportActionBar(findViewById(R.id.toolbar))
+
         viewModel.recipes.observe(this, Observer { recipes ->
             allRecipes.clear()
             allRecipes.addAll(recipes)
@@ -109,6 +113,25 @@ class RecipeListActivity : AppCompatActivity() {
 
         loadRecipes()
         setupRecipeTypeSpinner()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_recipe_list_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection.
+        return when (item.itemId) {
+            R.id.add_recipe_menu -> {
+                val filteredRecipeTypes = recipeTypeNames.filter { it != "Show All" }
+                val intent = Intent(this, AddRecipeActivity::class.java)
+                intent.putStringArrayListExtra("RECIPE_TYPES", ArrayList(filteredRecipeTypes))
+                addRecipeLauncher.launch(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun setupRecipeTypeSpinner() {

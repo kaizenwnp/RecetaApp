@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.recetaapp.MainActivity
 import com.example.recetaapp.R
@@ -56,8 +57,15 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 } else {
+                    val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+                    builder
+                        .setMessage(task.exception?.message)
+                        .setTitle("Login failed")
+                        .setPositiveButton(android.R.string.ok, null)
 
-                    Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    val dialog: AlertDialog = builder.create()
+                    dialog.show()
+                    //Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
     }
